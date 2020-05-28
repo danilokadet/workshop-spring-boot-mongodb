@@ -35,12 +35,12 @@ public class UserResource {
 	}
 	
 	
-	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
+	/*@RequestMapping(value = "/{id}",method = RequestMethod.GET)
 	public ResponseEntity<UserDTO> findById(@PathVariable String id) {
 
 		User obj = userService.findById(id);
-		return  obj;//ResponseEntity.ok().body(obj);
-	}
+		return ResponseEntity.ok().body(obj);
+	}*/
 	
 	
 	@PostMapping
@@ -52,6 +52,16 @@ public class UserResource {
 		return ResponseEntity.created(uri).build();
 		
 	}
+	
+	@RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable String id) {
+
+		userService.delete(id);
+		return ResponseEntity.noContent().build();
+		
+	}
+	
+	
 	
 
 }

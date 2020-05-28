@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,9 @@ public class UserService {
 		return repo.findAll();
 	}
 	
-	public User findById(String id) {
+	public Optional<User> findById(String id) {
 		
-		//User user = repo.findOne(id);
+		Optional<User> user = repo.findById(id);
 		
 		if(user == null) {
 			throw new ObjectNotFoundException("Objeto não encontrado");
@@ -41,6 +42,11 @@ public class UserService {
 	public User fromDTO(UserDTO objDto) {
 		
 		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
+	}
+	
+	public void delete(String id) {
+		findById(id);
+		repo.deleteById(id);
 	}
 
 }
